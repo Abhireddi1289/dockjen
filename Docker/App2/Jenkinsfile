@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'sudo docker build -t $FULL_IMAGE_NAME docker/app1/'          
+                sh 'sudo docker build -t $FULL_IMAGE_NAME docker/app2/'          
             }
         }
         stage('Login') {
