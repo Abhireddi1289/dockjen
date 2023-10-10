@@ -1,0 +1,23 @@
+pipeline {
+    agent {label 'docker'}
+
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+        IMAGE_NAME = "Devxpace"
+        VERSION = "1.0"
+        FULL_IMAGE_NAME = "$DOCKERHUB_CREDENTIALS_USR/$IMAGE_NAME:$VERSION"
+    }
+
+    stages {
+        stage('Pull') {
+            steps {
+                sh 'docker pull $FULL_IMAGE_NAME'          
+            }
+        }
+        stage('Run') {
+            steps {
+                sh 'docker run -d --name $IMAGE_NAME$VERSION3000 -p 3000:3000 $FULL_IMAGE_NAME'
+            }
+        }
+    }
+}
