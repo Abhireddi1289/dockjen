@@ -7,6 +7,6 @@ COPY Devxpace.js .
 
 RUN npm install
 
-EXPOSE 3000
+EXPOSE 4000
 
 ENTRYPOINT ["node", "Devxpace.js"]
