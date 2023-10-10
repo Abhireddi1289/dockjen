@@ -2,31 +2,35 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+        DOCKERHUB_CREDENTIALS = credentials('abhireddi1289/my-docker-image')
         IMAGE_NAME = "Devxpace"
         VERSION = "1.0"
-        FULL_IMAGE_NAME = "$DOCKERHUB_CREDENTIALS_USR/$IMAGE_NAME:$VERSION"
+        FULL_IMAGE_NAME = "${abhireddi1289}/${IMAGE_NAME}:1"
     }
 
     stages {
         stage('Build') {
             steps {
-                sh 'sudo docker build -t $FULL_IMAGE_NAME docker/app2/'          
+                sh 'sudo docker build -t $FULL_IMAGE_NAME docker/app2/'
             }
         }
         stage('Login') {
             steps {
-                    sh "docker login -u abhireddi1289 -p 9700@Abhi"
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'abhireddi1289/my-docker-image', usernameVariable: 'abhireddi1289', passwordVariable: '9700@Abhi')]) {
+                        sh "docker login -u abhireddi1289 -p 9700@Abhi"
+                    }
+                }
             }
         }
         stage('Push') {
             steps {
-                sh 'docker push $FULL_IMAGE_NAME'
+                sh 'docker push Devxpace'
             }
         }
         stage('Remove') {
             steps {
-                sh 'docker rmi $FULL_IMAGE_NAME'
+                sh 'docker rmi Devxpace'
             }
         }
     }
