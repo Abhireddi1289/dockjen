@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     // Define the URL of the Git repository and branch
-                    def gitRepoUrl = 'https://github.com/Abhireddi1289/abi2'
+                    def gitRepoUrl = 'https://github.com/Abhireddi1289/dockjen'
                     def gitBranch = 'main' // Replace with the desired branch name
 
                     // Checkout the Git repository
